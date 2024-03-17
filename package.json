@@ -1,19 +1,21 @@
 {
-  "name": "js-word-map",
+  "name": "kml2docx",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "The program for rendering a map with objects from a kml files and formatting it into a docx files. The program reads all kml files from a folder and creates docx files with the same name.",
+  "main": "main.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node main.ts",
     "build": "tsc",
     "deploy": "tsc & pkg .dist/main.js -t node16-win -c package.json"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "kml",
+    "docx",
+    "map"
+  ],
+  "author": "zl0i",
+  "license": "MIT",
   "dependencies": {
-    "@img/sharp-win32-x64": "^0.33.2",
     "axios": "^1.6.5",
     "docx": "^8.5.0",
     "pkg": "^5.8.1",
