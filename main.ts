@@ -1,23 +1,51 @@
 import * as docx from 'docx'
-import fs from 'fs/promises'
-import { parseKML } from './src/parseKML';
+import fs from 'fs'
+import { Folder, parseKML } from './src/parseKML';
 import { createImageParagraph } from './src/docxFrames';
 import { renderMap } from './src/map';
-
+import unzipper from 'unzipper'
 
 async function main() {
 
-    const files = await fs.readdir("./")
+    const files = fs.readdirSync("./")
 
     for (const file of files) {
-        if (!file.endsWith('.kml')) {
+        if (!/^.+\.km[zl]$/gm.test(file)) {
             continue
         }
-        console.log(`open ${file}`)
 
-        const name = file.split('.kml').join('')
-        const buffer = await fs.readFile(file);
-        const kml = await parseKML(buffer.toString())
+        console.log(`open ${file}`)
+        const name = file.split(/\.km[zl]$/gm).join('')
+
+        let kml: Folder[] = []
+
+        if (file.endsWith('.kml')) {
+            const buffer = fs.readFileSync(file);
+            kml = await parseKML(buffer.toString())
+        } else if (file.endsWith('.kmz')) {
+            const buffer: string = await new Promise((resolve, reject) => {
+                fs.createReadStream(file)
+                    .pipe(unzipper.Parse())
+                    .on("entry", function (entry) {
+                        if (entry.path.indexOf(".kml") === -1) {
+                            entry.autodrain();
+                            return;
+                        }
+                        let data = "";
+                        entry.on("error", reject);
+                        entry.on("data", function (chunk: string) {
+                            data += chunk;
+                        });
+                        entry.on("end", function () {
+                            resolve(data);
+                        });
+                    })
+                    .on("error", reject);
+            })
+            kml = await parseKML(buffer)
+        } else {
+            throw new Error('unknown  type file')
+        }
 
         const childrens: docx.Paragraph[] = []
         for (const folder of kml) {
@@ -42,7 +70,7 @@ async function main() {
             ]
         })
         const data = await docx.Packer.toBuffer(doc)
-        await fs.writeFile(`${name}.docx`, data);
+        fs.writeFileSync(`${name}.docx`, data);
     }
 }
 

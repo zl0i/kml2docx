@@ -21,10 +21,12 @@
     "pkg": "^5.8.1",
     "sharp": "^0.33.2",
     "staticmaps": "^1.13.0",
+    "unzipper": "^0.10.14",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@types/staticmaps": "^1.12.5",
+    "@types/unzipper": "^0.10.9",
     "@types/xml2js": "^0.4.14",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
