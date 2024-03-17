@@ -1,0 +1,30 @@
+{
+  "name": "js-word-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node main.ts",
+    "build": "tsc",
+    "deploy": "tsc & pkg .dist/main.js -t node16-win -c package.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@img/sharp-win32-x64": "^0.33.2",
+    "axios": "^1.6.5",
+    "docx": "^8.5.0",
+    "pkg": "^5.8.1",
+    "sharp": "^0.33.2",
+    "staticmaps": "^1.13.0",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@types/staticmaps": "^1.12.5",
+    "@types/xml2js": "^0.4.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
