@@ -56,7 +56,7 @@ async function main() {
             } else {
                 for (const mark of folder.placemarks) {
                     console.log(mark.name, "render...")
-                    const map = await renderMap(folder.placemarks)
+                    const map = await renderMap([mark])
                     childrens.push(createImageParagraph(map.image, mark.name, map.center, folder.name))
                 }
             }
