@@ -1,8 +1,8 @@
 import * as docx from 'docx'
 import fs from 'fs/promises'
-import { parseKML } from './parseKML';
-import { createImageParagraph } from './docxFrames';
-import { renderMap } from './map';
+import { parseKML } from './src/parseKML';
+import { createImageParagraph } from './src/docxFrames';
+import { renderMap } from './src/map';
 
 
 async function main() {

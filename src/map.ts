@@ -30,7 +30,7 @@ export async function renderMap(placemarks: Placemarks[]) {
             map.addMarker({
                 coord: mark.coords[0],
                 height: 48,
-                img: `./marker.png`,
+                img: `./images/marker.png`,
                 width: 58
             })
         } else if (mark.type == "Line") {
