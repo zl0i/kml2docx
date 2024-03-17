@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node main.ts",
     "build": "tsc",
-    "deploy": "tsc & pkg .dist/main.js -t node16-win -c package.json"
+    "release": "tsc & pkg .dist/main.js -t node16-win -c package.json"
   },
   "keywords": [
     "kml",
